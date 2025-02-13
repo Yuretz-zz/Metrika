@@ -1,0 +1,257 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, .9);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+header ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* Logo --------------------------------*/
+
+header .logo {
+    /* display: block; */
+    width: clamp(7.5rem, 11.25vw, 15rem);
+    height: clamp(7.5rem, 11.25vw, 15rem);
+    background-color: var(--color-brand);
+    flex-shrink: 0;
+
+    transition: transform .5s ease-out, opacity 1s;
+
+}
+
+header .logo span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    mask-image: url(../img/Metrika_logo.svg);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: #fff;
+}
+
+header .logo.startPosition {
+    transform: translateY(-16rem);
+    opacity: 0;
+}
+
+
+/* Menu -----------------------------*/
+
+header nav {
+    flex-grow: 1;
+    position: relative;
+}
+
+header .menu {
+    display: inline-flex;
+    flex-grow: 0;
+    padding: 0 calc(var(--indentation) * 2);
+}
+
+header .menu > li:not(:last-child) {
+    margin-right: calc(var(--indentation));
+}
+
+header .menu-link {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    transition: .5s ease-out;
+}
+
+header .menu-link.startPosition,
+header .tools.startPosition {
+    transform: translateY(-4rem);
+    opacity: 0;
+}
+
+
+/* Submenu --------------------------*/
+
+header .submenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: calc(var(--indentation) * 1) calc(var(--indentation) * 2);
+}
+
+header .submenu li:not(:last-child) {
+    margin-right: calc(var(--indentation) * 1);
+}
+
+header .submenu-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+header:not(.mobile) .menu > li:hover .submenu {
+    display: flex;
+}
+
+header:not(.mobile) .menu > li:hover .submenu .submenu-link {
+    opacity: 0;
+    animation-delay: calc(.1s * var(--i));
+    animation-name: jump-menu;
+    animation-duration: .5s;
+    animation-timing-function: cubic-bezier(0, 0, 0, 1);
+    animation-fill-mode: forwards;
+}
+
+
+
+/* Tools -------------------*/
+
+header .tools {
+    display: flex;
+    transition: transform .5s cubic-bezier(0, 0, 0, 1);
+
+}
+
+header .phone {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    white-space: pre;
+}
+
+header .burger {
+    display: none;
+    width: 3rem;
+    height: 3rem;
+    margin-left: var(--indentation);
+    mask-image: url(../img/burger-icon.svg);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background: var(--color-grey);
+    position: relative;
+}
+
+header .burger::before {
+    content: '';
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* Menu Mobile ---------------*/
+
+header.mobile.active {
+    bottom: 0;
+    color: #fff;
+}
+
+header.mobile nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    background-color: var(--color-brand);
+    
+    overflow-y: auto;
+    z-index: -1;
+}
+
+header.mobile nav::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: calc(clamp(7.5rem, 11.25vw, 15rem) + var(--indentation) * 4);
+    background-color: var(--color-brand);
+    opacity: .9;
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+header.mobile.active nav {
+    display: block;
+}
+
+header.mobile.active .logo {
+    background-color: #fff;
+}
+
+header.mobile.active .logo span {
+    background-color: var(--color-brand);
+}
+
+header.mobile .menu {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+header.mobile .menu > li {
+    margin-right: 0;
+}
+
+header.mobile .menu-link {
+    width: 100%;
+    height: 5rem;
+}
+
+header.mobile .submenu {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    padding-left: 4rem;
+}
+
+header.mobile .submenu-link {
+    height: 5rem;
+}
+
+header.mobile .burger {
+    display: block;
+}
+
+header.mobile.active .burger {
+    mask-image: url(../img/close-icon.svg);
+    background-color: #fff;
+}
+
+.temp .container {
+    padding-top: 0;
+}
+
+@keyframes jump-menu {
+    from {
+        transform: translateY(-4rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
